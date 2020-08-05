@@ -2,11 +2,12 @@
 {% load static %}
 {% block body %}
 <div class="mybookingContainer">
+    <h1>My Itineraries</h1>
     {% if flightExists %}
         <table class="mybookingTable">
             <tbody>
                 <tr class="mybookingTitle">
-                    <td colspan="3">Current Itinerary</td>
+                    <td colspan="3">Current Flight Itinerary</td>
                 </tr>
                 <tr class="myBookingTitleRow">
                     <td class="myBookingTitleTd">Flight</td>
@@ -19,7 +20,7 @@
                 <tr>
                     <td class="mybookingFlightDetail">
                         <table>
-                            <tr><td><label class="mybookingLabel">Flight#: {{ outboundFlight.id }}</label></td></tr>
+                            <tr><td><label class="mybookingLabel">Flight #{{ outboundFlight.id }}</label></td></tr>
                             <tr><td><label >{{ outboundFlight.carrier }}</label></td></tr>
                             <tr><td><label > </label></td></tr>
                         </table>
@@ -50,7 +51,7 @@
                     <tr>
                         <td class="mybookingFlightDetail">
                             <table>
-                                <tr><td><label class="mybookingLabel">Flight#: {{ inboundFlight.id }}</label></td></tr>
+                                <tr><td><label class="mybookingLabel">Flight #{{ inboundFlight.id }}</label></td></tr>
                                 <tr><td><label >{{ inboundFlight.carrier }}</label></td></tr>
                                 <tr><td><label > </label></td></tr>
                             </table>
@@ -85,7 +86,7 @@
     <table class="mybookingTable">
         <tbody>
             <tr class="mybookingTitle">
-                <td colspan="3">Current Itinerary</td>
+                <td colspan="3">Current Hotel Itinerary</td>
             </tr>
             <tr class="myBookingTitleRow">
                 <td class="myBookingTitleTd">Hotel</td>
@@ -101,11 +102,13 @@
     </table>
     {% endif %}
 
+    <br>
+
     {% if flightExists %}
     <table class="mybookingTable">
         <tbody>
             <tr class="mybookingTitle">
-                <td colspan="3">Passengers</td>
+                <td colspan="3">Guests</td>
             </tr>
             <tr class="myBookingTitleRow">
                 <td class="myBookingTitleTd">First Name</td>
@@ -122,6 +125,9 @@
         </tbody>
     </table>
     {% endif %}
+
+    <br>
+
 </div>
 {% endblock %}
 

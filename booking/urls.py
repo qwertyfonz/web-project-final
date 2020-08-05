@@ -8,7 +8,6 @@ urlpatterns = [
     path("logout", views.logout_view, name="logout"),
     path("register", views.register, name="register"),
     path("flightsearch", views.flightSearch, name="flightsearch"),
-    #path("mybookings/<str:user>", views.mybookings, name="mybookings"),
     path("hotelindex", views.hotelIndex, name="hotelindex"),
     path("hotelsearch", views.hotelSearch, name="hotelsearch"),
     path("tripsummary", views.tripSummary, name="tripsummary"),

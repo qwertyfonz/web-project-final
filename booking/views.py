@@ -12,14 +12,14 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django import forms
 from datetime import datetime
 
-from .models import Airport, Flight,Passenger, Hotel,FlightBooking,HotelBooking
+from .models import Airport, Flight, Passenger, Hotel, FlightBooking, HotelBooking
 from decimal import Decimal
 
 
 def index(request): 
-    airports    = Airport.objects.all()
+    airports = Airport.objects.all()
     return render(request, "booking/index.html", {
-        "airports"      : airports
+        "airports": airports
     })
 
 def login_view(request):
@@ -154,7 +154,7 @@ def processbooking(request):
             "numPassengersRange"    : range(1, int(numPassengers)+1),
             "numPassengers"         : numPassengers,
             "inboundStatus"         : inboundStatus,
-            "totalAmount"             : totalAmount
+            "totalAmount"           : totalAmount
         }
 
         if inboundStatus == "true":
@@ -181,8 +181,8 @@ def flightBooking(request):
         outboundFlight      = Flight.objects.filter(id=outboundFlightId).first()
         trip.flights.add(outboundFlight)
         parameterArray = {
-            "inboundStatus"     : inboundStatus,
-            "outboundFlight"    : outboundFlight
+            "inboundStatus"  : inboundStatus,
+            "outboundFlight" : outboundFlight
         }
             
         #If round trip, create return flight object
@@ -208,8 +208,9 @@ def flightBooking(request):
             count += 1
         
         trip.save()
-        parameterArray.update({"passengers": trip.passengers.all(), "flightExists": True})
-        return render(request, "booking/mybookings.html", parameterArray)
+        #parameterArray.update({"passengers": trip.passengers.all(), "flightExists": True})
+        #return render(request, "booking/mybookings.html", parameterArray)
+    return myBooking(request)
 
 
 @login_required
@@ -219,8 +220,6 @@ def hotelBooking(request):
         checkinDate     = request.POST.get('checkin-date')
         checkoutDate    = request.POST.get('checkout-date')
         amountPaid      = request.POST.get('amount-paid')
-
-
         name            = request.POST.get('hotel-name')
         hotel           = Hotel.objects.filter(name=name).first()
       
@@ -229,6 +228,9 @@ def hotelBooking(request):
         trip.totalAmount = amountPaid
         trip.save()
 
+        return myBooking(request)
+    return HttpResponseRedirect(reverse("hotelindex"))
+    """
         parameterArray = {
             "name"        : name,
             "duration"    : duration,
@@ -238,57 +240,7 @@ def hotelBooking(request):
         }
     
     return render(request, "booking/mybookings.html", parameterArray)
-    
-
-@login_required
-def myBooking(request):
-    requestUser = request.user
-    parameterArray = {}
-    flightExists = False
-    hotelExists = False
-
-    try:
-        trip            = FlightBooking.objects.filter(user=requestUser).last()
-        flightExists    = True
-        parameterArray.update({"passengers": trip.passengers.all()})
-        flights         = trip.flights.all()
-        outboundFlight  = flights.first()
-        inboundStatus   = "false"
-        parameterArray.update({
-            "outboundFlight": outboundFlight,
-            "flightExists"  : flightExists
-            })
-
-        if len(flights) > 1:
-            inboundFlight   = flights.last()
-            inboundStatus   = "true"
-            parameterArray.update({"inboundFlight": inboundFlight}) 
-    
-        parameterArray.update({"inboundStatus": inboundStatus})
-    except:
-        print("No flight booking exists.")
-
-    try:
-        hotelBooking   = HotelBooking.objects.filter(user=requestUser)
-        print('hotel booking',len(hotelBooking))
-        hotelExists    = False
-        if len(hotelBooking)>0:
-            hotelExists    = True
-            
-           #hotelBooked    = hotelBooking.hotel
-            #name           = hotelBooked.name
-            #checkinDate    = hotelBooked.checkinDate
-            #checkoutDate   = hotelBooked.checkoutDate
-            #parameterArray.update({"hotelBooking": hotelBooking})
-       
-        print('hotelBooking last=',hotelBooking.last());
-        parameterArray.update({"hotelBooking": hotelBooking.last()})
-        parameterArray.update({"hotelExists": hotelExists})
-    except:
-        print("No hotel booking exists.")
-
-    return render(request, "booking/mybookings.html", parameterArray)
-
+    """
 
 def hotelIndex(request):
     hotelCities = Hotel.objects.values('city').distinct()
@@ -308,13 +260,14 @@ def hotelSearch(request):
         delta = (checkOutDateStr - checkInDateStr).days
         
 
-    return render(request, "booking/hotelsearch.html", {
-        "hotels": hotels,
-        "city"  : city,
-        "delta" : delta,
-        "checkInDate":checkInDate,
-        "checkOutDate":checkOutDate,
-    })
+        return render(request, "booking/hotelsearch.html", {
+            "hotels"      : hotels,
+            "city"        : city,
+            "delta"       : delta,
+            "checkInDate" : checkInDate,
+            "checkOutDate": checkOutDate,
+        })
+    return HttpResponseRedirect(reverse("hotelindex"))
 
 @login_required
 def hotelSummary(request):
@@ -347,7 +300,48 @@ def hotelSummary(request):
             "costAfterTax"          : str(round(costAfterTax, 2))
         }
 
-    return render(request, "booking/hotelsummary.html", parameterArray)
-        
-     
+        return render(request, "booking/hotelsummary.html", parameterArray)
+    return HttpResponseRedirect(reverse("hotelindex"))
+          
+@login_required
+def myBooking(request):
+    requestUser = request.user
+    parameterArray = {}
+    flightExists = False
+    hotelExists = False
 
+    try:
+        trip            = FlightBooking.objects.filter(user=requestUser).last()
+        flightExists    = True
+        parameterArray.update({"passengers": trip.passengers.all()})
+        flights         = trip.flights.all()
+        outboundFlight  = flights.first()
+        inboundStatus   = "false"
+        parameterArray.update({
+            "outboundFlight": outboundFlight,
+            "flightExists"  : flightExists
+            })
+
+        if len(flights) > 1:
+            inboundFlight   = flights.last()
+            inboundStatus   = "true"
+            parameterArray.update({"inboundFlight": inboundFlight}) 
+    
+        parameterArray.update({"inboundStatus": inboundStatus})
+
+    except:
+        print("No flight booking exists.")
+
+    try:
+        hotelBooking   = HotelBooking.objects.filter(user=requestUser)
+        
+        if len(hotelBooking) > 0:
+            hotelExists    = True
+            
+        recentHotelBooking = hotelBooking.last()
+        parameterArray.update({"hotelBooking": hotelBooking.last()})
+        parameterArray.update({"hotelExists": hotelExists})
+    except:
+        print("No hotel booking exists.")
+
+    return render(request, "booking/mybookings.html", parameterArray)

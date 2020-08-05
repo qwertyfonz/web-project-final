@@ -3,24 +3,28 @@
       "name":"Courtyard by Marriott New York Downtown Manhattan/World Trade Center Area",
       "city": "New York City",
       "address": "133 Greenwich St, New York, NY 10006",
-      "price": "129"
+      "price": "129",
+      "image": "https://cf.bstatic.com/images/hotel/max1024x768/157/157706028.jpg"
     },
     {
       "name":"Conrad New York Downtown",
       "city": "New York City",
       "address": "102 North End Ave, New York, NY 10282",
-      "price": "379"
+      "price": "379",
+      "image": "https://www.turningleftforless.com/wp-content/uploads/2020/01/hotel-exterior-880x580-1-777x437.jpg"
     },
     {
       "name":"InterContinental Boston",
       "city": "Boston",
       "address": "510 Atlantic Ave, Boston, MA 02210",
-      "price": "199"
+      "price": "199",
+      "image": "https://www.bostonseaport.xyz/wp-content/uploads/2017/02/boston-seaport-places-intercontinental-boston-massachusetts-1.jpg"
     },
     {
       "name":"The Liberty, a Luxury Collection Hotel, Boston",
       "city": "Boston",
       "address": "215 Charles St, Boston, MA 02114",
-      "price": "305"
+      "price": "305",
+      "image": "https://cf.bstatic.com/images/hotel/max1024x768/253/253539847.jpg"
     }
 ]

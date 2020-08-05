@@ -26,10 +26,8 @@ class Flight(models.Model):
     carrier         = models.CharField(max_length=64)
     duration        = models.IntegerField(default=0)
     price           = models.IntegerField(default=random_num)
-    # capacity        = models.IntegerField(default=200)
-    # numOfPassengers = models.IntegerField(default=0)
-  
 
+  
 class Passenger(models.Model):
     first           = models.CharField(max_length=64)
     last            = models.CharField(max_length=64)
@@ -50,10 +48,10 @@ class Hotel(models.Model):
     price   = models.IntegerField(default=0)
     image   = models.URLField()  
 
+
 class HotelBooking(models.Model):
     user            = models.ForeignKey(User, on_delete=models.CASCADE)
-    hotel           = models.ManyToManyField(Hotel)
+    hotel           = models.ForeignKey(Hotel, on_delete=models.CASCADE, null=True, blank=True)
     checkIn         = models.DateField()
     checkOut        = models.DateField()
     totalAmount     = models.DecimalField(max_digits=6, decimal_places=2, default=0)
-

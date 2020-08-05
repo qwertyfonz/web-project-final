@@ -55,7 +55,7 @@
         <tr>
             <td style="font-weight: bold">Fare: {{ outboundFlight.origin.city }}, {{ outboundFlight.origin.state }} ({{ outboundFlight.origin.code }}) - {{ outboundFlight.destination.city }}, {{ outboundFlight.destination.state }} ({{ outboundFlight.destination.code }})  
                 {% if inboundStatus != 'false' %}
-                    , {{ inboundFlight.origin.name }}, {{ inboundFlight.origin.state }} ({{ inboundFlight.origin.code }}) - {{ inboundFlight.destination.name }}, {{ inboundFlight.destination.state }} ({{ inboundFlight.destination.code }})
+                    , {{ inboundFlight.origin.city }}, {{ inboundFlight.origin.state }} ({{ inboundFlight.origin.code }}) - {{ inboundFlight.destination.city }}, {{ inboundFlight.destination.state }} ({{ inboundFlight.destination.code }})
                 {% endif %}
             </td>
             <td></td>
