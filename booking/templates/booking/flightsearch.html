@@ -1,0 +1,82 @@
+{% extends "booking/layout.html" %}
+{% load static %}
+
+
+{% block body %}
+
+{% if not user.is_authenticated %}
+<p><b>To book flights, please log in.</b></p>
+{% endif %}
+
+<form method="post" id="search-result" action="{% url 'tripsummary' %}" onsubmit="return validateSelectedFlight()">
+    {% csrf_token %}  
+    <input type="hidden" id="num-passengers" name="num-passengers" value="{{ numPassengers }}">
+    <input type="hidden" id="inbound-exists" name="inbound-exists" value="{{ inboundStatus }}">
+    <input type="hidden" id="fromAirport-code" name="fromAirport-code" value="{{ fromAirport.code }}">
+    <input type="hidden" id="toAirport-code" name="toAirport-code" value="{{ toAirport.code }}">
+    <input type="hidden" id="departure-date" name="departDate" value="{{ departDate }}">
+    <input type="hidden" id="return-date" name="returnDate" value="{{ returnDate }}">
+    
+    <h3 class="subTitle">Departing flights on {{ departDate }}</h3>
+    <h4 class="origDest">{{ fromAirport.city }}, {{ fromAirport.state }} to {{ toAirport.city}}, {{ toAirport.state }} ({{ toAirport.code}})</h4>
+    <input type="hidden" id="outbound-flight" name="outbound-flight">
+    <div id="outbound-flights">
+        {% for flight in outboundFlights %}
+            <div class="single-object" id="outbound-flight-{{ flight.id }}" onclick="getFlight('{{ flight.id }}', 'outbound')">
+                <h5>Flight #{{ flight.id }}</h5>
+                <h5 class="price">${{ flight.price }} USD</h5>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><b>{{ flight.departureTime }} - {{ flight.arrivalTime }}</b></td>
+                            <td><b>{{ flight.duration }} min</b></td>
+                        </tr>
+                        <tr>
+                            <td>{{ flight.carrier }}</td>
+                            <td>{{ flight.origin.code }} - {{ flight.destination.code }} </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        {% endfor %}
+    </div>
+    <br><br>
+
+    {% if inboundStatus != 'false' %}
+        <h3 class="subTitle" >Returning flights on {{ returnDate }}</h3>
+        <h4 class="origDest">{{ toAirport.city }}, {{ toAirport.state }} to {{fromAirport.city}}, {{ fromAirport.state }} ({{ fromAirport.code}})</h4>
+        <input type="hidden" id="inbound-flight" name="inbound-flight">
+        <div id="inbound-flights">
+            {% for flight in inboundFlights %}
+                <div class="single-object" id="inbound-flight-{{ flight.id }}" onclick="getFlight('{{ flight.id }}', 'inbound')">
+                    <h5>Flight #{{ flight.id }}</h5>
+                    <h5 class="price">${{ flight.price }} USD</h5>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td><b>{{ flight.departureTime }} - {{ flight.arrivalTime }}</b></td>
+                                <td><b>{{ flight.duration }} min</b></td>
+                            </tr>
+                            <tr>
+                                <td>{{ flight.carrier }}</td>
+                                <td>{{ flight.origin.code }} - {{ flight.destination.code }} </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <br>
+    {% if user.is_authenticated %}
+        <input type="submit" id="choose-flights" class="btn btn-primary" value="Continue">
+    {% endif %}
+    <br><br>
+</form>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'booking/booking.js' %}"></script>
+{% endblock %}

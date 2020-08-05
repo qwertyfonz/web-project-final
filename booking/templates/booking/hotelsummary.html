@@ -1,0 +1,72 @@
+{% extends "booking/layout.html" %}
+{% load static %}
+
+{% block body %}
+<h1>Booking Summary</h1>
+<h3 class="subTitle">Your Selected Hotel</h3>
+
+<div class="single-object" id="hotel-{{ hotelId }}">
+    <div class="hotel-info">
+        <table>
+            <tr><td><b>{{ hotel.name }}</b></td></tr>
+            <tr><td>{{ hotel.address }}</td></tr>
+        </table>
+    </div>
+
+    <br>
+    <div class="hotel-image">
+        <img src="{{ hotel.image }}">
+    </div>
+
+    <br>
+    <p>Price per night: ${{ hotel.price }} USD</p>
+</div>
+
+<h3 class="subTitle">Your itinerary</h3>
+<table class="itineraryTable">
+    <tbody>
+        <tr>
+            <td style="font-weight: bold">{{ duration }} Night(s) Stay</td>
+        </tr>
+        <tr>
+            <td>
+                {{ checkInDateDisplay }} - {{ checkOutDateDisplay }}
+            </td>
+            <td class="totalBeforeTax">${{ cost }} USD</td>
+        </tr>
+        <tr class="itinerary">
+            <td>Taxes & fees (8.5%)</td>
+            <td class="totalBeforeTax">$ {{ tax }} USD</td>
+        </tr>
+        <tr class="estimateTotalRow">
+            <td>Estimated total</td>
+            <td class="estimateTotal">${{ costAfterTax }} USD</td>
+        </tr>
+    </tbody>
+</table>
+
+<br>
+
+<form method="post" id="booking-form" action="{% url 'hotelbooking' %}">
+    {% csrf_token %}
+
+    <input type="hidden" id="hotel-name" name="hotel-name" value="{{ hotel.name }}">
+    <input type="hidden" id="stay-duration" name="stay-duration" value="{{ duration }}">
+    <input type="hidden" id="checkin-date" name="checkin-date" value="{{ checkInDate }}">        
+    <input type="hidden" id="checkout-date" name="checkout-date" value="{{ checkOutDate }}">
+    <input type="hidden" id="amount-paid" name="amount-paid" value="{{ costAfterTax }}">
+
+    {% if user.is_authenticated %}
+        <div class="tripSummaryButtonContainer">    
+            <input type="submit" class="btn btn-primary" value="Confirm Booking">
+        </div>
+    {% endif %}
+</form>  
+
+
+{% endblock %}
+
+
+{% block script %}
+    <script src="{% static 'booking/booking.js' %}"></script>
+{% endblock %}

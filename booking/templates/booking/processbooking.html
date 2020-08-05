@@ -1,0 +1,39 @@
+{% extends "booking/layout.html" %}
+{% load static %}
+
+
+{% block body %}
+<div id="passengers-container">
+    <h3>Passenger Information</h3>
+    <form method="post" id="booking" action="{% url 'flightbooking' %}" onsubmit="return required()">
+        <input type=hidden id="numPassengers" name="numPassengers" value="{{ numPassengers }}">
+        <input type=hidden id="inboundStatus" name="inboundStatus" value="{{ inboundStatus }}">
+        <input type=hidden id="totalAmount" name="totalAmount" value="{{ totalAmount }}">"
+        <input type=hidden id="outboundFlight.id" name="outboundFlight.id" value="{{ outboundFlightId }}">        
+        <input type=hidden id="inboundFlight.id" name="inboundFlight.id" value="{{ inboundFlightId }}">
+        {% csrf_token %}
+        {% for i in numPassengersRange %}
+            <div class="single-passenger-form">
+                <h5>Passenger #{{ i }}:</h5><br>
+                <label>First Name:</label>
+                    <input type="text" name="first-name-{{ i }}" id="first-name-{{ i }}">
+                
+                <label>Last Name:</label>    
+                <input type="text" name="last-name-{{ i }}" id="last-name-{{ i }}">
+
+                <label>Date of Birth:</label>
+                <input type="date" name="date-of-birth-{{ i }}" id="date-of-birth-{{ i }}">
+                <br><br>
+            </div>
+        {% endfor %}
+
+        <input type="submit" id="confirm-booking" value="Confirm Booking" class="btn btn-primary">
+</form>
+</div>
+
+{% endblock %}
+
+
+{% block script %}
+    <script src="{% static 'booking/booking.js' %}"></script>
+{% endblock %}

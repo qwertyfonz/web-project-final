@@ -1,0 +1,92 @@
+{% extends "booking/layout.html" %}
+{% load static %}
+
+{% block body %}
+<h1>Flight Search</h1>
+<p>Due to COVID-19, all flights are fictitious until further notice.</p>
+<p>Here for all of your virtual travel needs!</p>
+
+<div class="index-containter">
+    <div id="trip-buttons">
+        <button id="one-way-button" class="btn btn-info">One Way</button>
+        <button id="round-trip-button" class="btn btn-info">Round Trip</button>
+    </div>
+
+    <form method="post" id="search-form" action="{% url 'flightsearch' %}" onsubmit="return validateSearchFlight()">
+        {% csrf_token %}  
+            
+    <div id="passengers">
+        <label>Number of Guests: </label>
+        <select name="num-passengers" id="num-passengers">       
+            <option value="1">1 passenger</option>
+            <option value="2">2 passengers</option>
+            <option value="3">3 passengers</option>
+            <option value="4">4 passengers</option>
+            <option value="5">5 passengers</option>
+            <option value="6">6 passengers</option>
+            <option value="7">7 passengers</option>
+            <option value="8">8 passengers</option>
+            <option value="9">9 passengers</option>
+        </select>     
+    </div>
+
+    <br>
+
+    <div id="search-container">
+        <table>
+            <tr>
+                <td><label>From: </label></td>
+                <td><select name="from" id="from" required>
+                    <option value="none">Leaving from</option>
+                    {% for airport in airports %}
+                        <option value="{{ airport.code }}">{{ airport.city }} ({{ airport.code }})</option>
+                    {% endfor %}
+                </select></td>
+            </tr>
+            <tr>  
+                <td><label>To: </label></td>
+                <td><select name="to" id="to" required>
+                    <option value="none">Going to</option>
+                    {% for airport in airports %}
+                        <option value="{{ airport.code }}">{{ airport.city }} ({{ airport.code }})</option>
+                    {% endfor %}
+                    </select></td>
+            </tr>
+            <tr>
+                <td><label>Depart: </label></td>
+                <td><input type="date" id="depart-date" name="depart-date" max="2021-02-01" required></td>
+            </tr>
+            <tr>
+                <td><label>Return: </label></td>
+                <td><input type="date" id="return-date" name="return-date" max="2021-02-01" required></td>
+            </tr>
+            <input id="inbound-exists" name="inbound-exists" type="hidden" value="true">
+        </table>
+    </div>
+
+    <br>
+
+    <div id="search-flights">
+        <input type="submit" value="Search Flights" class="btn btn-primary">
+    </div>
+</div>
+</form>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'booking/booking.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('one-way-button').onclick = function() {
+                document.querySelector('#return-date').disabled = true;
+                document.querySelector('#inbound-exists').value = "false";
+            };
+            document.getElementById('round-trip-button').onclick = function() {
+                document.querySelector('#return-date').disabled = false;
+                document.querySelector('#inbound-exists').value = "true";
+            };
+            getDate();
+        })
+    </script>
+{% endblock %}

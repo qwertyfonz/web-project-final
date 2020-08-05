@@ -1,0 +1,164 @@
+[
+    {
+      "origin": "BOS",
+      "destination": "JFK",
+      "date": "08/05/2020",
+      "departure-time": "6,00",
+      "arrive-time": "7,05",
+      "duration":	   65,
+      "carrier": "JetBlue"   
+    },
+    {
+      "origin": "BOS",
+      "destination": "JFK",
+      "date": "08/05/2020",
+      "departure-time": "8,14",
+      "arrive-time": "9,24",
+      "duration":	   80,
+      "carrier": "JetBlue"   
+    },
+    {
+      "origin": "BOS",
+      "destination": "JFK",
+      "date": "08/05/2020",
+      "departure-time": "13,48",
+      "arrive-time": "15,12",
+      "duration":	   84,
+      "carrier": "Delta"   
+    },
+    {
+      "origin": "BOS",
+      "destination": "JFK",
+      "date": "08/05/2020",
+      "departure-time": "17,16",
+      "arrive-time": "18,45",
+      "duration":	   85,
+      "carrier": "Delta"   
+    },
+    {
+      "origin": "BOS",
+      "destination": "JFK",
+      "date": "08/05/2020",
+      "departure-time": "19,59",
+      "arrive-time": "21,11",
+      "duration":	   72,
+      "carrier": "JetBlue"   
+    },
+    {
+      "origin": "BOS",
+      "destination": "LGA",
+      "date": "08/05/2020",
+      "departure-time": "11,00",
+      "arrive-time": "12,16",
+      "duration":	   76,	
+      "carrier": "American Airlines"   
+    },
+    {
+      "origin": "BOS",
+      "destination": "LGA",
+      "date": "08/05/2020",
+      "departure-time": "11,00",
+      "arrive-time": "12,21",
+      "duration":	   81,
+      "carrier": "Delta"   
+  },	
+  {
+      "origin": "BOS",
+      "destination": "LGA",
+      "date": "08/05/2020",
+      "departure-time": "19,59",
+      "arrive-time": "21,24",
+      "duration":	   85,
+      "carrier": "Delta"   
+  },	
+  {
+      "origin": "BOS",
+      "destination": "LGA",
+      "date": "08/05/2020",
+      "departure-time": "7,00",
+      "arrive-time": "8,26",
+      "duration":	   86,	
+      "carrier": "Delta"   
+  },
+  {
+    "origin": "JFK",
+    "destination": "BOS",
+    "date": "08/05/2020",
+    "departure-time": "6,00",
+    "arrive-time": "7,05",
+    "duration":	   65,
+    "carrier": "JetBlue"   
+  },
+  {
+    "origin": "JFK",
+    "destination": "BOS",
+    "date": "08/05/2020",
+    "departure-time": "8,14",
+    "arrive-time": "9,24",
+    "duration":	   80,
+    "carrier": "JetBlue"   
+  },
+  {
+    "origin": "JFK",
+    "destination": "BOS",
+    "date": "08/05/2020",
+    "departure-time": "13,48",
+    "arrive-time": "15,12",
+    "duration":	   84,
+    "carrier": "Delta"   
+  },
+  {
+    "origin": "JFK",
+    "destination": "BOS",
+    "date": "08/05/2020",
+    "departure-time": "17,16",
+    "arrive-time": "18,45",
+    "duration":	   85,
+    "carrier": "Delta"   
+  },
+  {
+    "origin": "JFK",
+    "destination": "BOS",
+    "date": "08/05/2020",
+    "departure-time": "19,59",
+    "arrive-time": "21,11",
+    "duration":	   72,
+    "carrier": "JetBlue"   
+  },
+  {
+    "origin": "LGA",
+    "destination": "BOS",
+    "date": "08/05/2020",
+    "departure-time": "11,00",
+    "arrive-time": "12,16",
+    "duration":	   76,	
+    "carrier": "American Airlines"   
+  },
+  {
+    "origin": "LGA",
+    "destination": "BOS",
+    "date": "08/05/2020",
+    "departure-time": "11,00",
+    "arrive-time": "12,21",
+    "duration":	   81,
+    "carrier": "Delta"   
+  },	
+  {
+    "origin": "LGA",
+    "destination": "BOS",
+    "date": "08/05/2020",
+    "departure-time": "19,59",
+    "arrive-time": "21,24",
+    "duration":	   85,
+    "carrier": "Delta"   
+  },	
+  {
+    "origin": "LGA",
+    "destination": "BOS",
+    "date": "08/05/2020",
+    "departure-time": "7,00",
+    "arrive-time": "8,26",
+    "duration":	   86,	
+    "carrier": "Delta"   
+  }
+] 	

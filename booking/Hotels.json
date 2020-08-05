@@ -1,0 +1,26 @@
+[
+    {
+      "name":"Courtyard by Marriott New York Downtown Manhattan/World Trade Center Area",
+      "city": "New York City",
+      "address": "133 Greenwich St, New York, NY 10006",
+      "price": "129"
+    },
+    {
+      "name":"Conrad New York Downtown",
+      "city": "New York City",
+      "address": "102 North End Ave, New York, NY 10282",
+      "price": "379"
+    },
+    {
+      "name":"InterContinental Boston",
+      "city": "Boston",
+      "address": "510 Atlantic Ave, Boston, MA 02210",
+      "price": "199"
+    },
+    {
+      "name":"The Liberty, a Luxury Collection Hotel, Boston",
+      "city": "Boston",
+      "address": "215 Charles St, Boston, MA 02114",
+      "price": "305"
+    }
+]

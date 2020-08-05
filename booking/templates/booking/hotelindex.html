@@ -1,0 +1,51 @@
+{% extends "booking/layout.html" %}
+{% load static %}
+
+{% block body %}
+<h1>Hotel Search</h1>
+<p>Due to COVID-19, all hotel bookings are fictitious until further notice.</p>
+<p>Here for all of your virtual travel needs!</p>
+
+<br>
+
+<form method="post" id="hotel-search-form" action="{% url 'hotelsearch' %}" onsubmit="return validateSearchHotel()">
+{% csrf_token %}    
+
+<div id="hotel-form">
+    <table>
+        <tr>
+            <td><label>City: </label></td>
+            <td>
+                <select name="hotel-location" id="hotel-location">
+                    <option value="none">City</option>
+                        {% for hotel in hotelCities %}
+                            <option value="{{ hotel.city }}">{{ hotel.city }}</option>
+                        {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label>Check-in: </label></td>
+            <td><input type="date" id="checkin-date" name="checkin-date" max="2021-02-01" required></td>
+        </tr>
+        <tr>
+            <td><label>Check-out: </label></td>
+            <td><input type="date" id="checkout-date" name="checkout-date" max="2021-02-01" required></td>
+        </tr>
+    </table>
+</div>
+
+<br>
+
+<div id="search-hotels">
+    <input type="submit" value="Search Hotels" class="btn btn-primary">
+</div>
+
+</form>
+
+{% endblock %}
+
+
+{% block script %}
+    <script src="{% static 'booking/booking.js' %}"></script>
+{% endblock %}

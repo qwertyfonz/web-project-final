@@ -1,0 +1,52 @@
+{% extends "booking/layout.html" %}
+{% load static %}
+
+
+{% block body %}
+
+{% if not user.is_authenticated %}
+<p><b>To book hotels, please log in.</b></p>
+{% endif %}
+
+<h3 class="subTitle">Hotels</h3>
+<h4 class="origDest">{{ city }}</h4>
+
+<form method="post" action="{% url 'hotelsummary' %}" onsubmit="return validateSelectedHotel()">
+    {% csrf_token %}
+    <input type="hidden" id="hotel-id" name="hotel-id" value="0">
+    <input type="hidden" id="hotel-city" name="hotel-city" value="{{ city }}">
+    <input type="hidden" id="hotel-stay-duration" name="hotel-stay-duration" value="{{ delta }}">
+    <input type="hidden" id="hotel-checkin" name="hotel-checkin" value="{{ checkInDate }}">
+    <input type="hidden" id="hotel-checkout" name="hotel-checkout" value="{{ checkOutDate }}">
+
+    {% for hotel in hotels %}
+        <div class="single-object" id="hotel-{{ hotel.id }}" onclick="getHotel('{{ hotel.id }}')">
+            <div class="hotel-info">
+                <table>
+                    <tr><td><b>{{ hotel.name }}</b></td></tr>
+                    <tr><td>{{ hotel.address }}</td></tr>
+                </table>
+            </div>
+
+            <br>
+            <div class="hotel-image">
+                <img src="{{ hotel.image }}">
+            </div>
+
+            <br>
+            <p>Price per night: ${{ hotel.price }} USD</p>
+
+        </div>
+    {% endfor %}
+
+    <br><br>
+
+    {% if user.is_authenticated %}
+        <input type="submit" id="choose-hotels" class="btn btn-primary" value="Continue">
+    {% endif %}
+</form>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'booking/booking.js' %}"></script>
+{% endblock %}

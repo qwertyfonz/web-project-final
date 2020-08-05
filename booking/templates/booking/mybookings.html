@@ -1,0 +1,131 @@
+{% extends "booking/layout.html" %}
+{% load static %}
+{% block body %}
+<div class="mybookingContainer">
+    {% if flightExists %}
+        <table class="mybookingTable">
+            <tbody>
+                <tr class="mybookingTitle">
+                    <td colspan="3">Current Itinerary</td>
+                </tr>
+                <tr class="myBookingTitleRow">
+                    <td class="myBookingTitleTd">Flight</td>
+                    <td class="myBookingTitleTd">Depart</td>            
+                    <td class="myBookingTitleTd">Arrives</td>
+                </tr>
+                <tr class="myBookingOrigDestRow">
+                    <td colspan="3">{{ outboundFlight.origin.city }} to {{ outboundFlight.destination.city }} - Total travel time: {{ outboundFlight.duration }} min</td>
+                </tr>
+                <tr>
+                    <td class="mybookingFlightDetail">
+                        <table>
+                            <tr><td><label class="mybookingLabel">Flight#: {{ outboundFlight.id }}</label></td></tr>
+                            <tr><td><label >{{ outboundFlight.carrier }}</label></td></tr>
+                            <tr><td><label > </label></td></tr>
+                        </table>
+                    </td>
+                    <td class="mybookingFlightDetail">
+                        <table>
+                            <tr><td><label class="mybookingLabel">{{ outboundFlight.origin.code }}  {{ outboundFlight.departureTime }}</label></td>
+                            </tr>
+                            <tr><td>{{ outboundFlight.date }}</td></tr>
+                            <tr><td>{{ outboundFlight.origin.city }}, {{ outboundFlight.origin.name }}</td></tr>
+                        </table>
+                        
+                    </td>
+                    <td class="mybookingFlightDetail">
+                        <table>
+                            <tr><td><label class="mybookingLabel">{{ outboundFlight.destination.code }}  {{ outboundFlight.arrivalTime }}</label></td>
+                            </tr>
+                            <tr><td>{{ outboundFlight.date }}</td></tr>
+                            <tr><td>{{ outboundFlight.destination.city }}, {{ outboundFlight.destination.name }}</td></tr>
+                        </table>
+                        
+                    </td>
+                </tr>
+                {% if inboundStatus != 'false' %}
+                    <tr class="myBookingOrigDestRow">
+                        <td colspan="3">{{ inboundFlight.origin.city }} to {{ inboundFlight.destination.city }} - Total travel time: {{ inboundFlight.duration }} min</td>
+                    </tr>
+                    <tr>
+                        <td class="mybookingFlightDetail">
+                            <table>
+                                <tr><td><label class="mybookingLabel">Flight#: {{ inboundFlight.id }}</label></td></tr>
+                                <tr><td><label >{{ inboundFlight.carrier }}</label></td></tr>
+                                <tr><td><label > </label></td></tr>
+                            </table>
+                        </td>
+                        <td class="mybookingFlightDetail">
+                            <table>
+                                <tr><td><label class="mybookingLabel">{{ inboundFlight.origin.code }}  {{ inboundFlight.departureTime }}</label></td>
+                                </tr>
+                                <tr><td>{{ inboundFlight.date }}</td></tr>
+                                <tr><td>{{ inboundFlight.origin.city }}, {{ inboundFlight.origin.name }}</td></tr>
+                            </table>
+                            
+                        </td>
+                        <td class="mybookingFlightDetail">
+                            <table>
+                                <tr><td><label class="mybookingLabel">{{ inboundFlight.destination.code }}  {{ inboundFlight.arrivalTime }}</label></td>
+                                </tr>
+                                <tr><td>{{ inboundFlight.date }}</td></tr>
+                                <tr><td>{{ inboundFlight.destination.city }}, {{ inboundFlight.destination.name }}</td></tr>
+                            </table>
+                            
+                        </td>
+                    </tr>
+                {% endif %}           
+
+            </tbody>
+        </table>
+    {% endif %}
+    <br><br>
+
+    {% if hotelExists %}
+    <table class="mybookingTable">
+        <tbody>
+            <tr class="mybookingTitle">
+                <td colspan="3">Current Itinerary</td>
+            </tr>
+            <tr class="myBookingTitleRow">
+                <td class="myBookingTitleTd">Hotel</td>
+                <td class="myBookingTitleTd">Check In</td>            
+                <td class="myBookingTitleTd">Check Out</td>
+            </tr>
+            <tr class="myBookingFlightDetail">
+                <td class="myBookingTitleTd">{{ hotelBooking.hotel.name }}</td>
+                <td class="myBookingTitleTd">{{ hotelBooking.checkIn }}</td>
+                <td class="myBookingTitleTd">{{ hotelBooking.checkOut}}</td>
+            </tr>
+        </tbody>
+    </table>
+    {% endif %}
+
+    {% if flightExists %}
+    <table class="mybookingTable">
+        <tbody>
+            <tr class="mybookingTitle">
+                <td colspan="3">Passengers</td>
+            </tr>
+            <tr class="myBookingTitleRow">
+                <td class="myBookingTitleTd">First Name</td>
+                <td class="myBookingTitleTd">Last Name</td>            
+                <td class="myBookingTitleTd">Date of Birth</td>
+            </tr>
+            {% for passenger in passengers %}
+                <tr>
+                    <td class="myBookingTitleTd">{{ passenger.first }}</td>
+                    <td class="myBookingTitleTd">{{ passenger.last }}</td>            
+                    <td class="myBookingTitleTd">{{ passenger.dateOfBirth }}</td>
+                </tr>
+            {% endfor %}    
+        </tbody>
+    </table>
+    {% endif %}
+</div>
+{% endblock %}
+
+
+{% block script %}
+    <script src="{% static 'booking/booking.js' %}"></script>
+{% endblock %}

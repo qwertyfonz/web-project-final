@@ -1,0 +1,105 @@
+{% extends "booking/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+
+<h1>Trip Summary</h1>
+<h3 class="subTitle">Departing flight on {{ outboundFlight.date }}</h3>
+<h4 class="origDest">{{ outboundFlight.origin.city }}, {{ outboundFlight.origin.state }} to {{ outboundFlight.destination.city }}, {{ outboundFlight.destination.state }} ({{ outboundFlight.destination.code }})</h4>  
+<h5 class="price">${{ outboundFlight.price }} USD</h5>
+<table>
+    <tbody class="selectedFlight">
+        <tr>
+            <td>Flight #{{ outboundFlight.id }}</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><b>{{ outboundFlight.departureTime }} - {{ outboundFlight.arrivalTime }}</b></td>
+            <td><b>{{ outboundFlight.duration }} min</b></td>
+        </tr>
+        <tr>
+            <td>{{ outboundFlight.carrier }}</td>
+            <td>{{ outboundFlight.origin.code }} - {{ outboundFlight.destination.code }} </td>
+        </tr>
+    </tbody>
+</table>
+
+<br>
+{% if inboundStatus != 'false' %}
+    <h3 class="subTitle">Returning flight on {{ inboundFlight.date }}</h3>
+    <h4 class="origDest">{{ inboundFlight.origin.city }}, {{ inboundFlight.origin.state }} to {{ inboundFlight.destination.city }}, {{ inboundFlight.destination.state }} ({{ inboundFlight.destination.code }})</h4>
+    <h5 class="price">${{ inboundFlight.price }} USD</h5>
+        <table>
+            <tbody class="selectedFlight">
+                <tr>
+                    <td>Flight #{{ inboundFlight.id }}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><b>{{ inboundFlight.departureTime }} - {{ inboundFlight.arrivalTime }}</b></td>
+                    <td><b>{{ inboundFlight.duration }} min</b></td>
+                </tr>
+                <tr>
+                    <td>{{ inboundFlight.carrier }}</td>
+                    <td>{{ inboundFlight.origin.code }} - {{ inboundFlight.destination.code }} </td>
+                </tr>
+            </tbody>
+        </table>
+{% endif %}
+
+<br>
+<h3 class="subTitle">Your itinerary</h3>
+<table class="itineraryTable">
+    <tbody>
+        <tr>
+            <td style="font-weight: bold">Fare: {{ outboundFlight.origin.city }}, {{ outboundFlight.origin.state }} ({{ outboundFlight.origin.code }}) - {{ outboundFlight.destination.city }}, {{ outboundFlight.destination.state }} ({{ outboundFlight.destination.code }})  
+                {% if inboundStatus != 'false' %}
+                    , {{ inboundFlight.origin.name }}, {{ inboundFlight.origin.state }} ({{ inboundFlight.origin.code }}) - {{ inboundFlight.destination.name }}, {{ inboundFlight.destination.state }} ({{ inboundFlight.destination.code }})
+                {% endif %}
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                {{ numPassengers }} Traveler(s). {{ outboundFlight.date }}
+                {% if inboundStatus != 'false' %}
+                    - {{ inboundFlight.date }}
+                {% endif %}
+            </td>
+            <td class="totalBeforeTax">${{ totalAmount }} USD</td>
+        </tr>
+        <tr class="itinerary">
+            <td>Taxes & fees (8.5%)</td>
+            <td class="totalBeforeTax">$ {{ tax }} USD</td>
+        </tr>
+        <tr class="estimateTotalRow">
+            <td>Estimated total</td>
+            <td class="estimateTotal">${{ totalAmountPlusTax }} USD</td>
+        </tr>
+    </tbody>
+</table>
+    
+<br>
+
+<form method="post" id="booking-form" action="{% url 'processbooking' %}">
+    {% csrf_token %}
+
+    <input type="hidden" id="numPassengers" name="numPassengers" value="{{ numPassengers }}">
+    <input type="hidden" id="inboundStatus" name="inboundStatus" value="{{ inboundStatus }}">
+    <input type="hidden" id="outboundFlight.id" name="outboundFlight.id" value="{{ outboundFlight.id }}">        
+    <input type="hidden" id="inboundFlight.id" name="inboundFlight.id" value="{{ inboundFlight.id }}">
+    <input type="hidden" id="totalAmount" name="totalAmount" value="{{ totalAmount }}">
+
+    {% if user.is_authenticated %}
+        <div class="tripSummaryButtonContainer">    
+            <input type="submit" class="btn btn-primary" value="Continue">
+        </div>
+    {% endif %}
+</form>  
+{% endblock %}
+
+
+{% block script %}
+    <script src="{% static 'booking/booking.js' %}"></script>
+{% endblock %}

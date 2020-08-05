@@ -1,0 +1,238 @@
+body {
+    background-color: #F0F8FF;
+}
+
+p {
+    text-align: center;
+}
+
+#trip-buttons, #search-flights, #search-hotels {
+    display: block;   
+    text-align: center;
+}
+
+div.index-containter{
+    display: block;   
+    text-align: center;
+}
+
+#passengers {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+#search-container, #hotel-form {
+    display: flex;
+    text-align: left;
+    align-items: left;
+    justify-content: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+.single-object, .single-passenger-form {
+    border-style: solid;
+    border-color: grey;
+    border-width: 1px;
+    padding: 1%;
+    margin-top: 0.5em;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+/*
+.single-flight:hover {
+    background-color: lightskyblue;
+}*/
+
+#search-container table {
+    border: none;
+}
+
+td {
+    padding-left: 20px;
+}
+
+button {
+    margin-left: 20px;
+}
+
+#choose-flights, #confirm-booking, #choose-hotels {
+    margin-right: 2%;
+    position: relative;
+    float: right;
+}
+
+.price {
+    position: relative;
+    float: right;
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+.heading {
+    color: #111B40;
+}
+
+
+h3.subTitle {
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    color: #004990;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.origDest {
+    font-size: 15px;
+    font-weight: 200;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: #111B40;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h2 {
+    padding-right: 200px;
+}
+
+.itineraryPricingBlock {
+    padding: 8px 0 17px;
+}
+
+.itineraryPricingBlock, .bodyBlock {
+    background: #f1f5f8;
+    padding: 16px 8px 13px;
+}
+
+
+table.itineraryTable {
+    width: 100%;
+    font-size: 15px;
+    font-weight: 200;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1;
+}
+
+tr.itinerary {
+    border-bottom: 1px solid #ddd;
+  }
+
+td.totalBeforeTax {
+    color: #004990;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: right;
+    white-space: nowrap;
+    vertical-align: bottom;
+    padding-left: 11px;
+    padding-right: 11px;
+    padding-top: 1px;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+tr.estimateTotalRow, td.estimateTotal  {
+    color: #004990;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: right;
+    white-space: nowrap;
+    vertical-align: bottom;
+    padding-left: 11px;
+    padding-right: 11px;
+    padding-top: 1px;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+tbody.selectedFlight {
+    color: #004990;
+    font-size: 17px;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1;
+}
+
+div.mybookingContainer {
+    width: 100%;
+    height: 100%;
+}
+
+table.mybookingTable {
+    width: 80%;
+    margin: auto;
+}
+
+tr.myBookingTitleRow {
+    background-color: #111B40;
+    color: #F0F8FF;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1;
+    height:30px;
+}
+
+tr.myBookingOrigDestRow {
+    background-color: 	#DCDCDC;	
+    font-size: 20px;
+    font-family: Garamond, sans-serif;
+    line-height: 1;
+    height:50px;
+}
+
+td.myBookingTitleTd {
+    text-align: left;
+    border: 2px solid white;
+}
+
+td.mybookingFlightNumber {
+  text-align: left;  
+}
+
+label.mybookingLabel {
+    color: black;
+    font-size: 18px;    
+    font-weight: 700;
+}
+
+td.mybookingFlightDetail{
+    border:  2px solid white;
+
+}
+
+.mybookingTitle {
+    font-size: 25px;
+    font-weight: 500;
+    color: #004990;
+    font-family: Copperplate;
+    line-height: 1;    
+    height:30px;
+}
+
+div.tripSummaryButtonContainer {
+    display: block;
+    text-align: right;
+}
+
+img {
+    max-width: 200px;
+    max-height: 200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hotel-info {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
