@@ -1,0 +1,171 @@
+# Function used to populate the database with Airport objects (ended up not using)
+
+with open("booking/airports.json") as f:
+    data = json.load(f)
+        
+for jsonObj in data:
+    airport = Airport.objects.create()
+    airport.code = jsonObj["code"]
+    airport.name = jsonObj["name"]
+    airport.city = jsonObj["city"]
+    airport.country = jsonObj["country"]
+    airport.save()
+
+**********
+# Function used to populate the Flight objects
+
+start_date  = date(2020, 8, 5)
+end_date    = date(2021, 2, 1)
+delta       = timedelta(days=1)
+bosAirport  = Airport.objects.get(pk=1)
+jfkAirport  = Airport.objects.get(pk=2)
+lgaAirport  = Airport.objects.get(pk=3)
+
+while start_date <= end_date:
+    # print (start_date.strftime("%Y-%m-%d"))
+
+    flight = Flight.objects.create(origin=bosAirport, destination=jfkAirport)  
+    flight.date = start_date
+    flight.departureTime = time(6,00)
+    flight.arrivalTime = time(7,5)
+    flight.duration = 	   65
+    flight.carrier='JetBlue'   
+    flight.save()
+    
+    flight = Flight.objects.create(origin=bosAirport, destination=jfkAirport)
+    flight.date = start_date
+    flight.departureTime = time(8,14)
+    flight.arrivalTime = time(9,24)
+    flight.duration = 	   80
+    flight.carrier='JetBlue'   
+    flight.save()
+
+    flight = Flight.objects.create(origin=bosAirport, destination=jfkAirport)
+    flight.date = start_date
+    flight.departureTime = time(13,48)
+    flight.arrivalTime = time(15,12)
+    flight.duration = 	   84
+    flight.carrier='Delta'   
+    flight.save()
+
+    flight = Flight.objects.create(origin=bosAirport, destination=jfkAirport)
+    flight.date = start_date
+    flight.departureTime = time(17,16)
+    flight.arrivalTime = time(18,45)
+    flight.duration = 	   85
+    flight.carrier='Delta'   
+    flight.save()
+
+    flight = Flight.objects.create(origin=bosAirport, destination=jfkAirport)
+    flight.date = start_date
+    flight.departureTime = time(19,59)
+    flight.arrivalTime = time(21,11)
+    flight.duration = 	   72
+    flight.carrier='JetBlue'   
+    flight.save()
+
+    flight = Flight.objects.create(origin=bosAirport, destination=lgaAirport)
+    flight.date = start_date
+    flight.departureTime = time(11,00)
+    flight.arrivalTime = time(12,16)
+    flight.duration = 	   76	
+    flight.carrier='American Airlines'   
+    flight.save()
+
+    flight = Flight.objects.create(origin=bosAirport, destination=lgaAirport)
+    flight.date = start_date
+    flight.departureTime = time(11,00)
+    flight.arrivalTime = time(12,21)
+    flight.duration = 	   81
+    flight.carrier='Delta'   
+    flight.save()	
+
+    flight = Flight.objects.create(origin=bosAirport, destination=lgaAirport)
+    flight.date = start_date
+    flight.departureTime = time(19,59)
+    flight.arrivalTime = time(21,24)
+    flight.duration = 	   85
+    flight.carrier='Delta'   
+    flight.save()	
+
+    flight = Flight.objects.create(origin=bosAirport, destination=lgaAirport)
+    flight.date = start_date
+    flight.departureTime = time(7,00)
+    flight.arrivalTime = time(8,26)
+    flight.duration = 	   86	
+    flight.carrier='Delta'   
+    flight.save()
+
+    flight = Flight.objects.create(origin=jfkAirport, destination=bosAirport)
+    flight.date = start_date
+    flight.departureTime = time(6,00)
+    flight.arrivalTime = time(7,5)
+    flight.duration = 	   65
+    flight.carrier='JetBlue'   
+    flight.save()
+
+    flight = Flight.objects.create(origin=jfkAirport, destination=bosAirport)
+    flight.date = start_date
+    flight.departureTime = time(8,14)
+    flight.arrivalTime = time(9,24)
+    flight.duration = 	   80
+    flight.carrier='JetBlue'   
+    flight.save()
+
+    flight = Flight.objects.create(origin=jfkAirport, destination=bosAirport)
+    flight.date = start_date
+    flight.departureTime = time(13,48)
+    flight.arrivalTime = time(15,12)
+    flight.duration = 	   84
+    flight.carrier='Delta'   
+    flight.save()
+
+    flight = Flight.objects.create(origin=jfkAirport, destination=bosAirport)
+    flight.date = start_date
+    flight.departureTime = time(17,16)
+    flight.arrivalTime = time(18,45)
+    flight.duration = 	   85
+    flight.carrier='Delta'   
+    flight.save()
+
+    flight = Flight.objects.create(origin=jfkAirport, destination=bosAirport)
+    flight.date = start_date
+    flight.departureTime = time(19,59)
+    flight.arrivalTime = time(21,11)
+    flight.duration = 	   72
+    flight.carrier='JetBlue'   
+    flight.save()
+
+    flight = Flight.objects.create(origin=lgaAirport, destination=bosAirport)
+    flight.date = start_date
+    flight.departureTime = time(11,00)
+    flight.arrivalTime = time(12,16)
+    flight.duration = 	   76
+    flight.carrier='American Airlines'   
+    flight.save()
+
+    flight = Flight.objects.create(origin=lgaAirport, destination=bosAirport)
+    flight.date = start_date
+    flight.departureTime = time(11,00)
+    flight.arrivalTime = time(12,21)
+    flight.duration = 	   81
+    flight.carrier='Delta'   
+    flight.save()	
+
+    flight = Flight.objects.create(origin=lgaAirport, destination=bosAirport)
+    flight.date = start_date
+    flight.departureTime = time(19,59)
+    flight.arrivalTime = time(21,24)
+    flight.duration = 	   85
+    flight.carrier='Delta'   
+    flight.save()	
+
+    flight = Flight.objects.create(origin=lgaAirport, destination=bosAirport)
+    flight.date = start_date
+    flight.departureTime = time(7,00)
+    flight.arrivalTime = time(8,26)
+    flight.duration = 	   86	
+    flight.carrier='Delta'   
+    flight.save()	
+
+    start_date += delta
