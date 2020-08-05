@@ -1,3 +1,4 @@
+// Validates if a user's Flight Search inputs are valid
 function validateSearchFlight() {
 
     // Get From and To airports
@@ -12,11 +13,11 @@ function validateSearchFlight() {
     let returnDate      = document.getElementById('return-date').value;
     let inboundExists   = document.getElementById('inbound-exists').value;
 
-    // If the From and To airports are the same, then alert error; else if the Departure date is later than the Return date, then alert error
-    if (fromSelOption.value === 'none'){
+    // If the From and To airports are the same, are blank, or if the Departure date is later than the Return date, then alert error
+    if (fromSelOption.value === 'none') {
         alert('Please select a "From" airport.');
         return false;
-    } else if (toSelOption.value === 'none'){
+    } else if (toSelOption.value === 'none') {
         alert('Please select a "To" airport.');
         return false; 
     } else if (fromSelOption.value === toSelOption.value) {
@@ -30,11 +31,15 @@ function validateSearchFlight() {
     }
 }
 
+// Validates if a user's Hotel Search inputs are valid
 function validateSearchHotel() {
+
+    // Get city name and check-in and check-out dates
     let cityName         = document.getElementById('hotel-location').value;
     let checkinDate      = document.getElementById('checkin-date').value;
     let checkoutDate     = document.getElementById('checkout-date').value;
 
+    // If the city is blank or check-in date is later than the check-out date, then alert error
     if (cityName === 'none') {
         alert('Please select a city.');
         return false;
@@ -46,16 +51,20 @@ function validateSearchHotel() {
     }
 }
 
+// Validates if a user's selected flight is valid
 function validateSelectedFlight() { 
+
+    // Get inputs
     outboundFlight      = document.getElementById('outbound-flight').value;
     isInboundExisted    = document.getElementById('inbound-exists').value;
     
-    if (outboundFlight === "none" || outboundFlight === ''){
+    // If the departing Flight is none or blank, or if there is a returning Flight that is none or blank, alert an error
+    if (outboundFlight === "none" || outboundFlight === '') {
         alert('Please select Departing Flight.');
         return false;
     } else if (isInboundExisted === 'true') {
         inboundFlight   = document.getElementById('inbound-flight').value;
-        if (inboundFlight === 'none' || inboundFlight=== ''){
+        if (inboundFlight === 'none' || inboundFlight === '') {
             alert('Please select Returning Flight.');
             return false;
         }
@@ -64,6 +73,7 @@ function validateSelectedFlight() {
     }       
 }
 
+// Get the selected flight ID, as well as highlight the selected flight with a light sky blue background
 function getFlight(id, direction) {
     
     // Allow only one flight per outbound/inbound to be selected
@@ -84,6 +94,7 @@ function getFlight(id, direction) {
     }
 }
 
+// Set the initial dates in date inputs
 function getDate() {
     let today       = new Date();
     let todayDate   = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2); 
@@ -98,9 +109,10 @@ function getDate() {
 
 }
 
+// Validate non-nullable inputs on Passenger form
 function required() {
    let numberOfPassengers = document.getElementById('numPassengers').value
-    for (let i = 1; i<=numberOfPassengers; i++){
+    for (let i = 1; i <= numberOfPassengers; i++){
         if (document.getElementById('first-name-'+ i).value.length == 0 || 
             document.getElementById('last-name-' + i).value.length == 0 ||
             document.getElementById('date-of-birth-' + i).value.length == 0) {
@@ -111,6 +123,7 @@ function required() {
     return true; 
 } 
 
+// Get hotel ID and highlight selected hotel div
 function getHotel(hotelId) {
     document.querySelector('#hotel-id').value = hotelId;
     let allHotels = document.querySelectorAll('*[id^="hotel-"]');
@@ -120,6 +133,7 @@ function getHotel(hotelId) {
     document.querySelector(`#hotel-${hotelId}`).style.backgroundColor = 'lightskyblue';
 }
 
+// If no hotels selected, alert an error
 function validateSelectedHotel() {
     let hotelId = document.querySelector('#hotel-id').value
     if (hotelId === "0") {

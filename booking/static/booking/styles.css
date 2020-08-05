@@ -44,11 +44,6 @@ h1 {
     margin-left: 20px;
 }
 
-/*
-.single-flight:hover {
-    background-color: lightskyblue;
-}*/
-
 #search-container table {
     border: none;
 }
@@ -140,7 +135,7 @@ td.totalBeforeTax {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-tr.estimateTotalRow, td.estimateTotal  {
+tr.estimateTotalRow, td.estimateTotal {
     color: #004990;
     font-size: 20px;
     font-weight: 700;
@@ -203,7 +198,7 @@ label.mybookingLabel {
     font-weight: 700;
 }
 
-td.mybookingFlightDetail{
+td.mybookingFlightDetail {
     border:  2px solid white;
 
 }

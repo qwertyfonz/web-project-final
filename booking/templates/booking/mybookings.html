@@ -3,6 +3,10 @@
 {% block body %}
 <div class="mybookingContainer">
     <h1>My Itineraries</h1>
+    {% if flightExists == False and hotelExists == False %}
+        <p>No bookings found.</p>
+    {% endif %}
+
     {% if flightExists %}
         <table class="mybookingTable">
             <tbody>

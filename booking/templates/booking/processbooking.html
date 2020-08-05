@@ -6,11 +6,11 @@
 <div id="passengers-container">
     <h3>Passenger Information</h3>
     <form method="post" id="booking" action="{% url 'flightbooking' %}" onsubmit="return required()">
-        <input type=hidden id="numPassengers" name="numPassengers" value="{{ numPassengers }}">
-        <input type=hidden id="inboundStatus" name="inboundStatus" value="{{ inboundStatus }}">
-        <input type=hidden id="totalAmount" name="totalAmount" value="{{ totalAmount }}">"
-        <input type=hidden id="outboundFlight.id" name="outboundFlight.id" value="{{ outboundFlightId }}">        
-        <input type=hidden id="inboundFlight.id" name="inboundFlight.id" value="{{ inboundFlightId }}">
+        <input type="hidden" id="numPassengers" name="numPassengers" value="{{ numPassengers }}">
+        <input type="hidden" id="inboundStatus" name="inboundStatus" value="{{ inboundStatus }}">
+        <input type="hidden" id="totalAmount" name="totalAmount" value="{{ totalAmount }}">"
+        <input type="hidden" id="outboundFlight.id" name="outboundFlight.id" value="{{ outboundFlightId }}">        
+        <input type="hidden" id="inboundFlight.id" name="inboundFlight.id" value="{{ inboundFlightId }}">
         {% csrf_token %}
         {% for i in numPassengersRange %}
             <div class="single-passenger-form">
